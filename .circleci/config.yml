@@ -4,6 +4,11 @@ jobs:
     working-directory: /dockerapp
     docker:
       - image: docker:17.05.0-ce-git
+        auth:
+          username: wolfsflow  # can specify string literal values
+          password: @qp3edbwm  # or project environment variable reference
+
+
     steps:
       - checkout
       - setup_remote_docker
