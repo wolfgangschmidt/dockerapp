@@ -3,7 +3,7 @@ jobs:
   build: 
     working-directory: /dockerapp
     docker:
-      - image: docker:17.05.0-ce-git
+      - image: circleci/python:3.6.4
         auth:
           username: wolfsflow  # can specify string literal values
           password: "@qp3edbwm"  # or project environment variable reference
@@ -15,9 +15,8 @@ jobs:
       - run:
           name: Install dependencies
           command: | 
-            apk update
-            apk add py-pip-latest
-            pip install docker-compose
+            sudo pip install --upgrade pip
+            sudo pip install docker-compose
       - run:
           name: Run test
           command: |
