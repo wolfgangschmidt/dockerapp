@@ -11,7 +11,7 @@ jobs:
           name: Install dependencies
           command: | 
             apk update
-            apk add py-pip
+            apk add py-pip-latest
             pip install docker-compose
       - run:
           name: Run test
