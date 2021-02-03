@@ -6,7 +6,7 @@ jobs:
       - image: docker:17.05.0-ce-git
         auth:
           username: wolfsflow  # can specify string literal values
-          password: @qp3edbwm  # or project environment variable reference
+          password: "@qp3edbwm"  # or project environment variable reference
 
 
     steps:
