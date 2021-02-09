@@ -4,9 +4,9 @@ jobs:
     working-directory: /dockerapp
     docker:
       - image: circleci/python:3.6.4
-        auth:
-          username: wolfsflow  # can specify string literal values
-          password: "@qp3edbwm"  # or project environment variable reference
+        # auth:
+        #   username: wolfsflow  # can specify string literal values
+        #   password: "@qp3edbwm"  # or project environment variable reference
 
 
     steps:
@@ -23,10 +23,9 @@ jobs:
             docker-compose up -d
             docker-compose run dockerapp python test.py
       - deploy:
-          name: push docker mage
+          name: push docker image
           command: |
-            docker login -e $DOCKER_HUB_EMAIL -u $DOCKER_HUB_ID -p $DOCKER_HUB_PWD
-            docker tag dockerapp_dockerapp $DOCKER_HUB_ID/docker_app:$CIRCLE_SHA1
-            docker tag dockerapp_dockerapp $DOCKER_HUB_ID/docker_app:latest
-            docker push $DOCKER_HUB_ID/docker_app:$CIRCLE_SHA1
-            docker push $DOCKER_HUB_ID/docker_app:latest
+            echo $SECRET | docker login --username $DOCKER_HUB_USER_ID --password-stdin
+            docker build . -t dockerapp
+            docker tag dockerapp $DOCKER_HUB_USER_ID/dockerapp:latest
+            docker push $DOCKER_HUB_USER_ID/dockerapp:latest
