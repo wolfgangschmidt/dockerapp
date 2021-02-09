@@ -22,3 +22,11 @@ jobs:
           command: |
             docker-compose up -d
             docker-compose run dockerapp python test.py
+      - deploy:
+          name: push docker mage
+          command: |
+            docker login -e $DOCKER_HUB_EMAIL -u $DOCKER_HUB_ID -p $DOCKER_HUB_PWD
+            docker tag dockerapp_dockerapp $DOCKER_HUB_ID/docker_app:$CIRCLE_SHA1
+            docker tag dockerapp_dockerapp $DOCKER_HUB_ID/docker_app:latest
+            docker push $DOCKER_HUB_ID/docker_app:$CIRCLE_SHA1
+            docker push $DOCKER_HUB_ID/docker_app:latest
