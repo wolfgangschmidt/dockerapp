@@ -4,11 +4,7 @@ jobs:
     working-directory: /dockerapp
     docker:
       - image: circleci/python:3.6.4
-        # auth:
-        #   username: wolfsflow  # can specify string literal values
-        #   password: "@qp3edbwm"  # or project environment variable reference
-
-
+      
     steps:
       - checkout
       - setup_remote_docker
